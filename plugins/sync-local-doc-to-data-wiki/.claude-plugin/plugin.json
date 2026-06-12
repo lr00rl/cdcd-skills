@@ -1,0 +1,46 @@
+{
+  "name": "sync-local-doc-to-data-wiki",
+  "version": "0.1.0",
+  "displayName": "Sync Local Docs to Lark Data Wiki",
+  "description": "Personal lark-cli workflow for publishing local Markdown documents into a configured Lark/Feishu Data Wiki directory.",
+  "author": {
+    "name": "cdcd"
+  },
+  "homepage": "https://github.com/lr00rl/cdcd-skills",
+  "repository": "https://github.com/lr00rl/cdcd-skills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "claude-code",
+    "lark",
+    "feishu",
+    "wiki",
+    "markdown"
+  ],
+  "userConfig": {
+    "data_wiki_parent": {
+      "type": "string",
+      "title": "Data Wiki parent",
+      "description": "Optional parent Wiki URL or node token for the Data Wiki directory. Leave empty to provide it per request.",
+      "sensitive": true
+    },
+    "data_wiki_space_id": {
+      "type": "string",
+      "title": "Data Wiki space ID",
+      "description": "Optional Wiki space ID. Leave empty to discover it from the parent node.",
+      "sensitive": true
+    },
+    "lark_cli_bin": {
+      "type": "string",
+      "title": "lark-cli binary",
+      "description": "Path or command name for the local lark-cli executable.",
+      "default": "lark-cli"
+    },
+    "lark_cli_identity": {
+      "type": "string",
+      "title": "lark-cli identity",
+      "description": "Identity passed to lark-cli when needed: auto, user, or bot.",
+      "default": "auto"
+    }
+  }
+}

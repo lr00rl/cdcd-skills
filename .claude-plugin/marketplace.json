@@ -1,0 +1,36 @@
+{
+  "name": "cdcd-skills",
+  "owner": {
+    "name": "cdcd"
+  },
+  "description": "Public Claude Code plugins and agent skills maintained by cdcd.",
+  "plugins": [
+    {
+      "name": "sync-local-doc-to-data-wiki",
+      "source": "./plugins/sync-local-doc-to-data-wiki",
+      "displayName": "Sync Local Docs to Lark Data Wiki",
+      "description": "Personal lark-cli workflow for publishing local Markdown documents into a configured Lark/Feishu Data Wiki directory.",
+      "author": {
+        "name": "cdcd"
+      },
+      "homepage": "https://github.com/lr00rl/cdcd-skills",
+      "repository": "https://github.com/lr00rl/cdcd-skills",
+      "license": "MIT",
+      "keywords": [
+        "agent-skills",
+        "claude-code",
+        "lark",
+        "feishu",
+        "wiki",
+        "markdown"
+      ],
+      "category": "Productivity",
+      "tags": [
+        "lark-cli",
+        "wiki",
+        "markdown",
+        "workflow"
+      ]
+    }
+  ]
+}

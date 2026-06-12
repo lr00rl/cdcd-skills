@@ -20,10 +20,10 @@ class SyncError(RuntimeError):
 
 def main() -> int:
     args = parse_args()
-    lark = args.lark_cli or os.environ.get("LARK_CLI_BIN", "lark-cli")
-    parent = args.parent_wiki or os.environ.get("LARK_DATA_WIKI_PARENT")
+    lark = args.lark_cli or config_value("LARK_CLI_BIN", "lark_cli_bin") or "lark-cli"
+    parent = args.parent_wiki or config_value("LARK_DATA_WIKI_PARENT", "data_wiki_parent")
     if not parent:
-        raise SyncError("missing --parent-wiki or LARK_DATA_WIKI_PARENT")
+        raise SyncError("missing --parent-wiki, LARK_DATA_WIKI_PARENT, or Claude plugin data_wiki_parent config")
 
     markdown_path = Path(args.markdown_file).expanduser()
     if not markdown_path.is_file():
@@ -35,7 +35,7 @@ def main() -> int:
     identity = None if args.identity == "auto" else args.identity
 
     parent_node = get_wiki_node(lark, parent_token, identity)
-    space_id = args.space_id or os.environ.get("LARK_DATA_WIKI_SPACE_ID") or parent_node["space_id"]
+    space_id = args.space_id or config_value("LARK_DATA_WIKI_SPACE_ID", "data_wiki_space_id") or parent_node["space_id"]
     children = list_children(lark, space_id, parent_node["node_token"], identity)
     matches = [node for node in children if node.get("title") == title and node.get("obj_type") == "docx"]
 
@@ -105,11 +105,27 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--title", help="Child page title. Defaults to file stem")
     parser.add_argument("--mode", choices=("upsert", "create", "update"), default="upsert")
     parser.add_argument("--space-id", help="Wiki space ID. Defaults to parent get_node result or LARK_DATA_WIKI_SPACE_ID")
-    parser.add_argument("--identity", choices=("auto", "user", "bot"), default=os.environ.get("LARK_CLI_IDENTITY", "auto"))
+    parser.add_argument(
+        "--identity",
+        choices=("auto", "user", "bot"),
+        default=config_value("LARK_CLI_IDENTITY", "lark_cli_identity") or "auto",
+    )
     parser.add_argument("--lark-cli", help="Path to lark-cli binary")
     parser.add_argument("--dry-run", action="store_true", help="Resolve and plan without creating/updating")
     parser.add_argument("--show-tokens", action="store_true", help="Include raw Wiki/doc tokens in JSON output")
     return parser.parse_args()
+
+
+def config_value(env_name: str, plugin_key: str) -> str | None:
+    for key in (
+        env_name,
+        f"CLAUDE_PLUGIN_OPTION_{plugin_key}",
+        f"CLAUDE_PLUGIN_OPTION_{plugin_key.upper()}",
+    ):
+        value = os.environ.get(key)
+        if value:
+            return value
+    return None
 
 
 def normalize_markdown(markdown: str, title: str) -> str:

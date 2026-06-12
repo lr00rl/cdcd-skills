@@ -22,6 +22,17 @@ export LARK_CLI_IDENTITY="auto"
 
 Prefer passing `--parent-wiki` in the user task or command when multiple Data Wiki parents are in use.
 
+## Claude Code Plugin Configuration
+
+When installed through the Claude Code plugin marketplace, the plugin can store optional local `userConfig` values:
+
+- `data_wiki_parent`: parent Wiki URL or node token.
+- `data_wiki_space_id`: optional Wiki space ID.
+- `lark_cli_bin`: local `lark-cli` command or absolute binary path.
+- `lark_cli_identity`: `auto`, `user`, or `bot`.
+
+The helper script reads the normal `LARK_*` environment variables first, then falls back to Claude plugin `CLAUDE_PLUGIN_OPTION_*` values when Claude exports them for plugin subprocesses. Prefer per-command `--parent-wiki` when the target parent changes often.
+
 ## Required Tools
 
 - `lark-cli` available on `PATH`, or set `LARK_CLI_BIN`.

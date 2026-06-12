@@ -63,9 +63,42 @@ cp -R plugins/sync-local-doc-to-data-wiki/skills/sync-local-doc-to-data-wiki ~/.
 
 Restart Codex if the skill does not appear.
 
-## Install For Claude
+## Install For Claude Code As A Marketplace
 
-Claude Code can use the same Agent Skills folder:
+Claude Code supports native plugin marketplaces. This repo includes a Claude marketplace file at `.claude-plugin/marketplace.json` and a plugin manifest at `plugins/sync-local-doc-to-data-wiki/.claude-plugin/plugin.json`.
+
+From Claude Code:
+
+```bash
+claude plugin marketplace add lr00rl/cdcd-skills
+claude plugin install sync-local-doc-to-data-wiki@cdcd-skills
+```
+
+To configure the default parent during install:
+
+```bash
+claude plugin install sync-local-doc-to-data-wiki@cdcd-skills \
+  --config data_wiki_parent="https://example.feishu.cn/wiki/REPLACE_WITH_PARENT_NODE"
+```
+
+For local development:
+
+```bash
+claude plugin marketplace add /path/to/cdcd-skills
+claude plugin install sync-local-doc-to-data-wiki@cdcd-skills
+```
+
+Plugin skills are namespaced in Claude Code, so the explicit slash command is:
+
+```text
+/sync-local-doc-to-data-wiki:sync-local-doc-to-data-wiki
+```
+
+Claude may also load the skill automatically when the task asks to sync a local document to the configured Data Wiki parent.
+
+## Install As A Direct Claude Skill
+
+Direct skill folders are still useful as a fallback or while editing the skill without reinstalling a plugin:
 
 ```bash
 mkdir -p ~/.claude/skills

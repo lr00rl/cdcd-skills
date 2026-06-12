@@ -12,7 +12,7 @@ Publish a local Markdown document into a configured Lark/Feishu Wiki parent node
 ## Required Inputs
 
 - A local Markdown/text file path.
-- A target parent Wiki URL or node token from the user, `--parent-wiki`, or `LARK_DATA_WIKI_PARENT`.
+- A target parent Wiki URL or node token from the user, `--parent-wiki`, `LARK_DATA_WIKI_PARENT`, or Claude plugin config.
 - A title, or default to the local file stem.
 - A mode: `upsert` by default, `create` to fail if the page exists, or `update` to fail if it does not.
 - A working `lark-cli` installation with auth and resource permissions for the target Wiki parent.
@@ -53,6 +53,8 @@ Useful options:
 - `--space-id "..."` skips parent-node space discovery when already known.
 - `--identity user|bot|auto` passes identity only when a non-auto value is required.
 - `--dry-run` resolves and plans but does not create/update.
+
+When installed as a Claude Code plugin, the script also accepts Claude plugin `userConfig` values exported as `CLAUDE_PLUGIN_OPTION_*` environment variables. Prefer explicit CLI arguments or `LARK_*` environment variables when a session uses multiple Wiki parents.
 
 If the script fails because of unsupported CLI behavior, read `references/lark-cli-workflow.md` and perform the same API calls manually with `lark-cli`.
 
