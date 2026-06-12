@@ -1,0 +1,4 @@
+interface:
+  display_name: "同步本地文档到飞书 Data Wiki"
+  short_description: "lark-cli workflow for publishing Markdown to Wiki"
+  default_prompt: "Use $sync-local-doc-to-data-wiki to publish a local Markdown document into the configured Data team Lark Wiki directory through lark-cli."

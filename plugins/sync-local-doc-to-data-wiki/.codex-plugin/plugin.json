@@ -1,0 +1,38 @@
+{
+  "name": "sync-local-doc-to-data-wiki",
+  "version": "0.1.0",
+  "description": "Personal lark-cli workflow for publishing local Markdown documents into a configured Lark/Feishu Data Wiki directory.",
+  "author": {
+    "name": "cdcd"
+  },
+  "homepage": "https://github.com/lr00rl/cdcd-skills",
+  "repository": "https://github.com/lr00rl/cdcd-skills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "codex",
+    "claude",
+    "lark",
+    "feishu",
+    "wiki",
+    "markdown"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Sync Local Docs to Lark Data Wiki",
+        "shortDescription": "lark-cli workflow for publishing Markdown to Wiki",
+        "longDescription": "A personal workflow skill and thin helper script for using lark-cli to sync local Markdown documents into a configured Lark/Feishu Wiki directory without committing private Wiki URLs, tokens, user IDs, or local paths.",
+    "developerName": "cdcd",
+    "category": "Productivity",
+    "capabilities": [
+      "Write",
+      "Automation"
+    ],
+    "defaultPrompt": [
+      "Sync this local Markdown file to the Data Wiki.",
+      "Publish this requirement doc into the configured Lark Wiki.",
+      "Update the matching Data Wiki child page from this local doc."
+    ],
+    "brandColor": "#2F6BFF"
+  }
+}

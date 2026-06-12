@@ -1,0 +1,20 @@
+{
+  "name": "cdcd-skills",
+  "interface": {
+    "displayName": "cdcd Skills"
+  },
+  "plugins": [
+    {
+      "name": "sync-local-doc-to-data-wiki",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sync-local-doc-to-data-wiki"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
